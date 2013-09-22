@@ -31,16 +31,12 @@ set(RESTC_LIBS "")
 
 # Find libmicrohttpd
 find_package(libmicrohttpd REQUIRED)
-if (${MHD_FOUND})
-	list(APPEND ${RESTC_INCLUDES} ${MHD_INCLUDE_DIRS})
-	list(APPEND ${RESTC_LIBS} ${MHD_LIBRARIES})
-endif(${MHD_FOUND})
 
 # Include Directories
-include_directories(${RESTC_INCLUDES})
+include_directories(${RESTC_INCLUDES} ${MHD_INCLUDE_DIRS})
 
 # Compile the code
 add_executable(${RESTC_NAME} ${RESTC_SOURCES})
 
 # Link libraries
-target_link_libraries(${RESTC_NAME} ${RESTC_LIBS})
+target_link_libraries(${RESTC_NAME} ${MHD_LIBRARIES})
